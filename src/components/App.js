@@ -1,25 +1,30 @@
+// react imports
 import React from 'react'
 
+// semantic-ui imports
+import { Grid, Container } from 'semantic-ui-react'
+
+// project file imports
 import NewMotherThread from './NewMotherThread.js'
 import { About } from './About.js'
 import Mothers from './Mothers.js'
 
 export const App = () => {
 	return (
-		<div className='ui container' style={{ marginTop: '10px' }}>
-			<div className='ui grid'>
-				<div className='column ten wide'>
+		<Container style={{marginTop: '10px'}}>
+			<Grid columns={2}>
+				<Grid.Column width={8}>
 					<Mothers/>
-				</div>
-				<div className='column five wide'>
-					<div className='row'>
+				</Grid.Column>
+				<Grid.Column width={7}>
+					<Grid.Row>
 						<NewMotherThread />
-					</div>
-					<div className='row' style={{ marginTop: '50px' }}>
+					</Grid.Row>
+					<Grid.Row style={{marginTop: '20px'}}>
 						<About/>
-					</div>
-				</div>
-			</div>
-		</div>
+					</Grid.Row>
+				</Grid.Column>
+			</Grid>
+		</Container>
 	)
 }

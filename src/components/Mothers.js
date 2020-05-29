@@ -1,52 +1,68 @@
+// react imports
 import React from 'react'
+
+// react-redux imports
 import { connect } from 'react-redux'
 
+// semantic-ui imports
+import { Comment, Header, Segment, Icon } from 'semantic-ui-react'
+
+// project file imports
 import Child from './Child.js'
 import NewChildThread from './NewChildThread.js'
 
 
 const Mothers = (props) => {
 	
+	// ALL_THREADS from the redux store	
 	const { mothers } = props
 
-	console.log(mothers)
-
+	// display all child threads of the mother threads
 	const displayChildrenOfMother = (mother, motherHistory) => {
 		if (mother.child.length > 0){
 			return (
 				<React.Fragment>
-					<div className='ui dividing header'>Comments</div>
-					{mother.child.map(item => <Child key={item.id} childData={item} linkHistory={motherHistory}/>)}
+					<Header dividing>
+						Comments
+					</Header>
+					{mother.child.map(item => <Child 
+												key={item.id} 
+												childData={item} 
+												linkHistory={motherHistory}
+												/>
+					)}
 				</React.Fragment>
 			)
 		}
 	}
 
+	// show all the mother threads on the redux store
 	const displayMothers = () => {
 		return (
 			<React.Fragment>
 				{mothers.map(mother => {
 					const motherHistory = [mother.id, ]
 					return (
-						<div className='ui segment' key={mother.id}>
-							<div className='ui dividing header'>{mother.title}</div>
-							<div className='ui tiny header'>by: <span style={{color: 'blue'}}>{mother.author}</span></div>
+						<Segment key={mother.id}>
+							<Header dividing as='h2'>{mother.title}</Header>
+							<Header as='h5'>by: <span style={{color: 'blue'}}>{mother.author}</span></Header>
 							<div className='text'>
-								<p>{mother.body}</p>
+								<p><Icon name='quote left'/> {mother.body} <Icon name='quote right'/></p>
 							</div>
 							<div>
 								<NewChildThread history={motherHistory}/>
 							</div>
-							<div className='ui comments'>
+							<Comment.Group>
 								{displayChildrenOfMother(mother, motherHistory)}
-							</div>
-						</div>
+							</Comment.Group>
+						</Segment>
 					)
 				})}
 			</React.Fragment>
 		)
 	}
 
+	// render
 	return (
 		<div className='motherthreads'>
 			{ displayMothers() }

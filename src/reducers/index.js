@@ -1,38 +1,38 @@
-import React from 'react'
+// redux imports
 import { combineReducers } from 'redux'
 
 const threadReducer = (threadsList = [
 		// Test Threads
 		{
 			id: 0,
-			title: 'A sample thread',
-			body: 'Lorem Ipsum dasdasdasd. ADSADadsasdad ndsadadbabdba!!!',
-			author: 'testAuthor',
+			title: 'This is a React App',
+			body: 'This app was built using React and Redux.',
+			author: 'withoutwax13',
 			child: [
 				{
 					id: 0,
-					body: 'Thread 0, Child 0',
-					author: 'testAuthor',
+					body: 'The UI is minimal.',
+					author: 'withoutwax13',
 					child: []
 				},
 				{
 					id: 1,
-					body: 'Thread 0, Child 1',
-					author: 'testAuthor',
+					body: 'The developer used some basic semantic-ui',
+					author: 'withoutwax13',
 					child: [
 						{
 							id: 0,
-							body: 'Thread 0, Child 1, Child 0',
+							body: 'Cool!',
 							author: 'testAuthor',
 							child: [
 								{
 									id: 0,
-									body: 'Thread 0, Child 1, Child 0, Child 0',
-									author: 'testAuthor',
+									body: 'Thank you!',
+									author: 'withoutwax13',
 									child: [
 										{
 											id: 0,
-											body: 'Thread 0, Child 1, Child 0, Child 0, Child 0',
+											body: 'You\'re awesome!',
 											author: 'testAuthor',
 											child: []
 										}
@@ -46,15 +46,15 @@ const threadReducer = (threadsList = [
 		},
 		{
 			id: 1,
-			title: 'A sample thread',
-			body: 'Thread 2',
+			title: 'Limitation of this App',
+			body: 'Data does not persist on this app',
 			author: 'testAuthor',
 			child: []
 		},
 		{
 			id: 2,
-			title: 'A sample thread',
-			body: 'Thread 3',
+			title: 'Portfolio Project',
+			body: 'Its simple yet so cool, right?',
 			author: 'anonymous',
 			child: []
 		}
@@ -64,94 +64,101 @@ const threadReducer = (threadsList = [
 	switch(action.type){
 		case 'NEW_MOTHER':
 			return threadsList.concat([action.payload])
-		case 'NEW_CHILD_LEVEL_0':
-			return threadsList.map(thread=>{
-				if (thread.id === action.payload.HISTORY[0]){
-					return {
-						...thread,
-						child: thread.child.concat([action.payload.newChild])
-					}
-				}
-				return thread
-			})
-		case 'NEW_CHILD_LEVEL_1':
-			return threadsList.map(thread => {
-				if (thread.id === action.payload.HISTORY[0]){
-					return {
-						...thread,
-						child: thread.child.map(item=>{
-							if (item.id === action.payload.HISTORY[1]){
-								return {
-									...item,
-									child: item.child.concat([action.payload.newChild])
-								}
+
+		// limits to only 3 sub-threads deep
+		case 'NEW_CHILD':
+			switch(action.payload.HISTORY.length){
+				case 1:
+					return threadsList.map(thread=>{
+						if (thread.id === action.payload.HISTORY[0]){
+							return {
+								...thread,
+								child: thread.child.concat([action.payload.newChild])
 							}
-							return item
-						})
-					}
-				}
-				return thread
-			})
-		case 'NEW_CHILD_LEVEL_2':
-			return threadsList.map(thread=>{
-				if (thread.id === action.payload.HISTORY[0]){
-					return {
-						...thread,
-						child: thread.child.map(item=>{
-							if (item.id === action.payload.HISTORY[1]){
-								return {
-									...item,
-									child: item.child.map(item_deep=>{
-										if (item_deep.id === action.payload.HISTORY[2]){
-											return {
-												...item_deep,
-												child: item_deep.child.concat([action.payload.newChild])
-											}
+						}
+						return thread
+					})
+				case 2:
+					return threadsList.map(thread => {
+						if (thread.id === action.payload.HISTORY[0]){
+							return {
+								...thread,
+								child: thread.child.map(item=>{
+									if (item.id === action.payload.HISTORY[1]){
+										return {
+											...item,
+											child: item.child.concat([action.payload.newChild])
 										}
-										return item_deep
-									})
-								}
+									}
+									return item
+								})
 							}
-							return item
-						})
-					}
-				}
-				return thread
-			})
-		case 'NEW_CHILD_LEVEL_3':
-			return threadsList.map(thread=>{
-				if (thread.id === action.payload.HISTORY[0]){
-					return {
-						...thread,
-						child: thread.child.map(item=>{
-							if (item.id === action.payload.HISTORY[1]){
-								return {
-									...item,
-									child: item.child.map(item_deep=>{
-										if (item_deep.id === action.payload.HISTORY[2]){
-											return {
-												...item_deep,
-												child: item_deep.child.map(item_deeper=>{
-													if (item_deeper.id === action.payload.HISTORY[3]){
-														return {
-															...item_deeper,
-															child: item_deeper.child.concat([action.payload.newChild])
-														}
+						}
+						return thread
+					})
+				case 3:
+					return threadsList.map(thread=>{
+						if (thread.id === action.payload.HISTORY[0]){
+							return {
+								...thread,
+								child: thread.child.map(item=>{
+									if (item.id === action.payload.HISTORY[1]){
+										return {
+											...item,
+											child: item.child.map(item_deep=>{
+												if (item_deep.id === action.payload.HISTORY[2]){
+													return {
+														...item_deep,
+														child: item_deep.child.concat([action.payload.newChild])
 													}
-													return item_deeper
-												})
-											}
+												}
+												return item_deep
+											})
 										}
-										return item_deep
-									})
-								}
+									}
+									return item
+								})
 							}
-							return item
-						})
-					}
-				}
-				return thread
-			})
+						}
+						return thread
+					})
+				case 4:
+					return threadsList.map(thread=>{
+						if (thread.id === action.payload.HISTORY[0]){
+							return {
+								...thread,
+								child: thread.child.map(item=>{
+									if (item.id === action.payload.HISTORY[1]){
+										return {
+											...item,
+											child: item.child.map(item_deep=>{
+												if (item_deep.id === action.payload.HISTORY[2]){
+													return {
+														...item_deep,
+														child: item_deep.child.map(item_deeper=>{
+															if (item_deeper.id === action.payload.HISTORY[3]){
+																return {
+																	...item_deeper,
+																	child: item_deeper.child.concat([action.payload.newChild])
+																}
+															}
+															return item_deeper
+														})
+													}
+												}
+												return item_deep
+											})
+										}
+									}
+									return item
+								})
+							}
+						}
+						return thread
+					})
+				default:
+					return null
+			}
 		default:
 			return threadsList
 	}

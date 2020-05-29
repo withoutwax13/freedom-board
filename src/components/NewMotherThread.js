@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { Segment, Header, Form, Message, Button } from 'semantic-ui-react'
+
 import { postThread } from '../actions'
 
 const NewMotherThread = (props) => {
@@ -9,18 +11,37 @@ const NewMotherThread = (props) => {
 	const [author, setAuthor] = React.useState('Anonymous')
 	const [body, setBody] = React.useState('')
 
+	const [shouldPopSuccess, setShouldPopSuccess] = React.useState(false)
+
 	const onPinButtonClick = () => {
 		props.postThread(props.lastMotherID, title, body, author)
 		setTitle('')
 		setBody('')
 		setAuthor('')
+		setShouldPopSuccess(true)
 	}
+
+	const popSuccess = () => {
+		return (
+			<Message 
+				success
+				header='New Thread Pinned!'
+				content='See thread list!'
+			/>
+		)
+	}
+
+	if (shouldPopSuccess){
+		window.setTimeout(()=>setShouldPopSuccess(false), 4000)
+	}
+
 	return (
-		<div className='ui segment'>
-			<div className='ui form'>
-				<div className='ui centered header'>New Thread</div>
-				<hr/><br/>
-				<span>
+		<Segment>
+			<Form success>
+				<Header dividing textAlign='center'>New Thread</Header>
+				<br/>
+					{shouldPopSuccess ? popSuccess() : ``}
+				<Form.Field>
 					<label 
 						htmlFor='title' 
 						className='ui header'>
@@ -56,10 +77,10 @@ const NewMotherThread = (props) => {
 						onChange={event=>setAuthor(event.target.value)} 
 						id='author'/>
 					<br/><br/>
-				</span>
-				<div className='ui primary button' onClick={onPinButtonClick}>Pin</div>
-			</div>
-		</div>
+				</Form.Field>
+				<Button primary onClick={onPinButtonClick}>Pin</Button>
+			</Form>
+		</Segment>
 	)
 }
 
