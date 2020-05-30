@@ -16,7 +16,10 @@ const NewMotherThread = (props) => {
 
 	const onPinButtonClick = () => {
 		props.postThread(props.lastMotherID, title, body, author)
-		if (props.username===null || newUsername===true){props.saveUsername(author)}
+		if (props.username===null || newUsername===true){
+			props.saveUsername(author)
+			setNewUsername(false)
+		}
 		setTitle('')
 		setBody('')
 		setAuthor('')

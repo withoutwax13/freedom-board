@@ -17,7 +17,7 @@ const NewChildThread = (props) => {
 	const [author, setAuthor] = React.useState('Anonymous')
 	const [shouldPopForm, setShouldPopForm] = React.useState(false)
 
-	const [newUsername, setNewUsername] = React.useState(props.username ? false : true)
+	const [newUsername, setNewUsername] = React.useState(false)
 
 	// returns correct id for next child
 	const findMyID = () => {
@@ -116,7 +116,10 @@ const NewChildThread = (props) => {
 							onClick={()=>{
 											const newId = findMyID()
 											props.postComment(props.history, newId, body, author)
-											if (props.username === null || newUsername === true){props.saveUsername(author)}	
+											if (props.username === null || newUsername === true){
+												props.saveUsername(author)
+												setNewUsername(false)
+											}	
 											setShouldPopForm(false)
 										}}>
 								Pin Reply
