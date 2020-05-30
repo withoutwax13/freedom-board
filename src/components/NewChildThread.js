@@ -5,10 +5,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // semantic-ui imports
-import { Form } from 'semantic-ui-react'
+import { Form, Select, Button } from 'semantic-ui-react'
 
 // project file imports
-import { postComment } from '../actions'
+import { postComment, saveUsername } from '../actions'
 
 const NewChildThread = (props) => {
 
@@ -16,6 +16,8 @@ const NewChildThread = (props) => {
 	const [body, setBody] = React.useState('Your Comment Here')
 	const [author, setAuthor] = React.useState('Anonymous')
 	const [shouldPopForm, setShouldPopForm] = React.useState(false)
+
+	const [newUsername, setNewUsername] = React.useState(props.username ? false : true)
 
 	// returns correct id for next child
 	const findMyID = () => {
@@ -29,6 +31,64 @@ const NewChildThread = (props) => {
 		return current.child.length
 	}
 
+	const nullCaseUsernameInput = () => {
+		return (
+			<React.Fragment>
+				<label
+					htmlFor='author'
+					className='ui header'>
+					Author
+				</label>
+				<input
+					type='text'
+					placeholder='Anonymous'
+					value={author}
+					onChange={event=>setAuthor(event.target.value)}
+					id='author'/>
+			</React.Fragment>
+		)
+	}
+
+	const trueCaseUsernameInput = () => {
+		const usernameOptions = [
+			{key: 'anon', value: 'Anonymous', text: 'Anonymous'},
+			{key: 'saved', value: props.username, text: props.username}
+		]
+		return (
+			<React.Fragment>
+					<label 
+							htmlFor='author' 
+							className='ui header'>
+							Author
+					</label>
+					<Select
+						options={usernameOptions}
+						placeholder='Select your username'
+						onSelect={event=>setAuthor(event.target.value)} 
+						id='author'/>
+					<br/>
+					<br/>
+					<Button secondary size='tiny' floated='right' onClick={()=>setNewUsername(true)}>Change Default Username</Button>
+			</React.Fragment>
+		)
+	}
+
+	const usernameInput = () => {
+		
+		if (!props.username){
+			return (
+				nullCaseUsernameInput()
+			)
+		}
+		else {
+			if (newUsername){
+				return nullCaseUsernameInput()
+			}else{
+				return trueCaseUsernameInput()
+			}
+		}
+	}
+
 	// returns form jsx
 	const popForm = () => {
 		if (shouldPopForm){
@@ -37,16 +97,7 @@ const NewChildThread = (props) => {
 					<br/><hr/><br/>
 					<Form size='small'>
 						<Form.Field>
-							<label htmlFor='author'>
-								Author
-							</label>
-							<input 
-								type='text' 
-								id='author' 
-								placeholder='Username' 
-								onChange={event=>{setAuthor(event.target.value)}} 
-								value={author}
-							/>
+							{usernameInput()}
 							<br/><br/>
 							<label htmlFor='body'>
 								Body
@@ -64,8 +115,9 @@ const NewChildThread = (props) => {
 							className='ui right floated tiny primary button' 
 							onClick={()=>{
 											const newId = findMyID()
-											setShouldPopForm(false)
 											props.postComment(props.history, newId, body, author)
+											if (props.username === null || newUsername === true){props.saveUsername(author)}	
+											setShouldPopForm(false)
 										}}>
 								Pin Reply
 						</div>
@@ -99,8 +151,9 @@ const NewChildThread = (props) => {
 
 const mapStateToProps = (state) => {
 	return {
-		mothers: state.ALL_THREADS
+		mothers: state.ALL_THREADS,
+		username: state.SAVED_USERNAME
 	}
 }
 
-export default connect(mapStateToProps, { postComment })(NewChildThread)
+export default connect(mapStateToProps, { postComment, saveUsername })(NewChildThread)

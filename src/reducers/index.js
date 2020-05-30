@@ -65,6 +65,10 @@ const threadReducer = (threadsList = [
 		case 'NEW_MOTHER':
 			return threadsList.concat([action.payload])
 
+		case 'ON_DEVELOPMENT_RECURSION_SOLUTION_FOR_NEW_CHILD':
+
+			return null
+
 		// limits to only 3 sub-threads deep
 		case 'NEW_CHILD':
 			switch(action.payload.HISTORY.length){
@@ -164,6 +168,14 @@ const threadReducer = (threadsList = [
 	}
 }
 
+const usernameReducer = (saved_username = null, action) => {
+	if (action.type === 'SAVE_USERNAME'){
+		return action.payload
+	}
+	return saved_username
+}
+
 export default combineReducers({
 	ALL_THREADS: threadReducer,
+	SAVED_USERNAME: usernameReducer
 })

@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { Segment, Header, Form, Message, Button } from 'semantic-ui-react'
+import { Segment, Header, Form, Message, Button, Select } from 'semantic-ui-react'
 
-import { postThread } from '../actions'
+import { postThread, saveUsername } from '../actions'
 
 const NewMotherThread = (props) => {
 
@@ -12,9 +12,11 @@ const NewMotherThread = (props) => {
 	const [body, setBody] = React.useState('')
 
 	const [shouldPopSuccess, setShouldPopSuccess] = React.useState(false)
+	const [newUsername, setNewUsername] = React.useState(props.username ? false : true)
 
 	const onPinButtonClick = () => {
 		props.postThread(props.lastMotherID, title, body, author)
+		if (props.username===null || newUsername===true){props.saveUsername(author)}
 		setTitle('')
 		setBody('')
 		setAuthor('')
@@ -26,14 +28,73 @@ const NewMotherThread = (props) => {
 			<Message 
 				success
 				header='New Thread Pinned!'
-				content='See thread list!'
+				content='NOTE: Your username entered will be permanent for this browser.'
 			/>
 		)
+	}
+
+	const nullCaseUsernameInput = () => {
+		return (
+			<React.Fragment>
+				<label
+					htmlFor='author'
+					className='ui header'>
+					Author
+				</label>
+				<input
+					type='text'
+					placeholder='Anonymous'
+					value={author}
+					onChange={event=>setAuthor(event.target.value)}
+					id='author'/>
+			</React.Fragment>
+		)
+	}
+
+	const trueCaseUsernameInput = () => {
+		const usernameOptions = [
+			{key: 'anon', value: 'Anonymous', text: 'Anonymous'},
+			{key: 'saved', value: props.username, text: props.username}
+		]
+		return (
+			<React.Fragment>
+					<label 
+							htmlFor='author' 
+							className='ui header'>
+							Author
+					</label>
+					<Select
+						options={usernameOptions}
+						placeholder='Select your username'
+						onSelect={event=>setAuthor(event.target.value)} 
+						id='author'/>
+					<br/>
+					<br/>
+					<Button secondary size='tiny' floated='right' onClick={()=>setNewUsername(true)}>Change Default Username</Button>
+			</React.Fragment>
+		)
+	}
+
+	const usernameInput = () => {
+		
+		if (!props.username){
+			return (
+				nullCaseUsernameInput()
+			)
+		}
+		else {
+			if (newUsername){
+				return nullCaseUsernameInput()
+			}else{
+				return trueCaseUsernameInput()
+			}
+		}
 	}
 
 	if (shouldPopSuccess){
 		window.setTimeout(()=>setShouldPopSuccess(false), 4000)
 	}
+
 
 	return (
 		<Segment>
@@ -65,17 +126,7 @@ const NewMotherThread = (props) => {
 						onChange={(event)=>setBody(event.target.value)}
 						value={body}/>
 					<br/><br/>
-					<label 
-						htmlFor='author' 
-						className='ui header'>
-						Author
-					</label>
-					<input 
-						type='text' 
-						placeholder='Anonymous' 
-						value={author}
-						onChange={event=>setAuthor(event.target.value)} 
-						id='author'/>
+					{usernameInput()}
 					<br/><br/>
 				</Form.Field>
 				<Button primary onClick={onPinButtonClick}>Pin</Button>
@@ -86,8 +137,9 @@ const NewMotherThread = (props) => {
 
 const mapStateToProps = (state) => {
 	return {
-		lastMotherID: state.ALL_THREADS.length
+		lastMotherID: state.ALL_THREADS.length,
+		username: state.SAVED_USERNAME
 	}
 }
 
-export default connect(mapStateToProps, { postThread })(NewMotherThread)
+export default connect(mapStateToProps, { postThread, saveUsername })(NewMotherThread)
