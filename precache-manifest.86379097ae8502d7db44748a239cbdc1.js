@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3f80412d077c8fb0d415462e9346cec5",
+    "revision": "6e606265ea6d62498fae43f89346ce64",
     "url": "/freedom-board/index.html"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/freedom-board/static/js/2.8176eacb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "04048f6b2a9b496f869a",
-    "url": "/freedom-board/static/js/main.ae766051.chunk.js"
+    "revision": "73daba4e4cba98dd90b9",
+    "url": "/freedom-board/static/js/main.6ef75e5d.chunk.js"
   },
   {
     "revision": "8239894f369bad1c28cd",
