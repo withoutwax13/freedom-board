@@ -1,7 +1,7 @@
 // react imports
 import React from 'react'
 
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 // semantic-ui imports
 import { Container } from 'semantic-ui-react'
@@ -19,11 +19,12 @@ export const App = () => {
 
 			<BrowserRouter>
 				<Header/>
-
-				<Route path='/' exact component={Mothers}/>
-				<Route path='/new' exact component={NewMotherThread}/>
-				<Route path='/about' exact component={About}/>
-				<Route path='/change_name' exact component={NewUsername}/>
+				<Switch>
+					<Route path='/' exact component={Mothers}/>
+					<Route path='/new' exact component={NewMotherThread}/>
+					<Route path='/about' exact component={About}/>
+					<Route path='/change_name' exact component={NewUsername}/>
+				</Switch>
 			</BrowserRouter>
 		</Container>
 	)
