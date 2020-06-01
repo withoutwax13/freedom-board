@@ -24,6 +24,7 @@ export const App = () => {
 					<Route path='/new' exact component={NewMotherThread}/>
 					<Route path='/about' exact component={About}/>
 					<Route path='/change_name' exact component={NewUsername}/>
+					<Route component={Mothers}/>
 				</Switch>
 			</BrowserRouter>
 		</Container>
