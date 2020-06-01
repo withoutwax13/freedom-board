@@ -10,7 +10,7 @@ export const About = () => {
 				centered
 			   	header='John Patrick Valera'
 			    meta='React Developer'
-			    description='John Patrick is a react developer living in Philippines who enjoys listening to Lorde and hanging with his 3 dogs.'
+			    description='John Patrick is a react developer living in Philippines who enjoys listening to Lorde and hanging out with his 3 dogs.'
 			  />
 			<a href='https://github.com/withoutwax13'><Icon name='github'/></a>
 			<a href='https://www.linkedin.com/in/john-patrick-valera-6a1493196/'><Icon name='linkedin'/></a>
