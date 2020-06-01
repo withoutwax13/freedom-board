@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/freedom-board/precache-manifest.86379097ae8502d7db44748a239cbdc1.js"
+  "/freedom-board/precache-manifest.403950899582b83f4e9edd4e4087b70e.js"
 );
 
 self.addEventListener('message', (event) => {
