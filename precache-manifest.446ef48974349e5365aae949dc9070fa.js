@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "edc0255f7f867427fb8abde07376fd86",
+    "revision": "deb92d429ddb170659e52b56447b3927",
     "url": "/freedom-board/index.html"
   },
   {
-    "revision": "7cabd3ac77cf81ba301d",
+    "revision": "e8791b763449c64e5776",
     "url": "/freedom-board/static/css/2.10aabec1.chunk.css"
   },
   {
-    "revision": "7cabd3ac77cf81ba301d",
-    "url": "/freedom-board/static/js/2.847e28d2.chunk.js"
+    "revision": "e8791b763449c64e5776",
+    "url": "/freedom-board/static/js/2.cb075e3e.chunk.js"
   },
   {
     "revision": "4d47ffde3dc69784e8e23fd910817ef8",
-    "url": "/freedom-board/static/js/2.847e28d2.chunk.js.LICENSE.txt"
+    "url": "/freedom-board/static/js/2.cb075e3e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "85fc65e66a555f1988fe",
-    "url": "/freedom-board/static/js/main.a4f9fa4e.chunk.js"
+    "revision": "35f84b9ffec7cf75aeb3",
+    "url": "/freedom-board/static/js/main.e77e4bcb.chunk.js"
   },
   {
     "revision": "8239894f369bad1c28cd",
