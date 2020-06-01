@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/freedom-board/static/js/main.e77e4bcb.chunk.js",
-    "main.js.map": "/freedom-board/static/js/main.e77e4bcb.chunk.js.map",
+    "main.js": "/freedom-board/static/js/main.a5cf4bf7.chunk.js",
+    "main.js.map": "/freedom-board/static/js/main.a5cf4bf7.chunk.js.map",
     "runtime-main.js": "/freedom-board/static/js/runtime-main.1c305e64.js",
     "runtime-main.js.map": "/freedom-board/static/js/runtime-main.1c305e64.js.map",
     "static/css/2.10aabec1.chunk.css": "/freedom-board/static/css/2.10aabec1.chunk.css",
     "static/js/2.cb075e3e.chunk.js": "/freedom-board/static/js/2.cb075e3e.chunk.js",
     "static/js/2.cb075e3e.chunk.js.map": "/freedom-board/static/js/2.cb075e3e.chunk.js.map",
     "index.html": "/freedom-board/index.html",
-    "precache-manifest.446ef48974349e5365aae949dc9070fa.js": "/freedom-board/precache-manifest.446ef48974349e5365aae949dc9070fa.js",
+    "precache-manifest.c53b76437b66c2ddf24035be8c6de045.js": "/freedom-board/precache-manifest.c53b76437b66c2ddf24035be8c6de045.js",
     "service-worker.js": "/freedom-board/service-worker.js",
     "static/css/2.10aabec1.chunk.css.map": "/freedom-board/static/css/2.10aabec1.chunk.css.map",
     "static/js/2.cb075e3e.chunk.js.LICENSE.txt": "/freedom-board/static/js/2.cb075e3e.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.1c305e64.js",
     "static/css/2.10aabec1.chunk.css",
     "static/js/2.cb075e3e.chunk.js",
-    "static/js/main.e77e4bcb.chunk.js"
+    "static/js/main.a5cf4bf7.chunk.js"
   ]
 }
